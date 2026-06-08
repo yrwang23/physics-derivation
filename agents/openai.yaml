@@ -1,0 +1,4 @@
+interface:
+  display_name: "Physics Derivation"
+  short_description: "Physics formula derivation with personal KB"
+  default_prompt: "帮我推导这个物理公式。请一步步来，走到需要某个方法或概念时告诉我它在这一步的作用，然后问我是否了解。我了解就继续，不了解你先讲再继续。推导完后请用KaTeX渲染一份HTML方便侧边栏对照查看。"
