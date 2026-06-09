@@ -60,6 +60,8 @@
 | 杂质模型基础 | [user-added/量子多体/impurity-models.md](./user-added/量子多体/impurity-models.md) | 共振能级, Anderson 杂质, 自能, U 项退耦 |
 | Cavity 方法 | [user-added/量子多体/cavity-method.md](./user-added/量子多体/cavity-method.md) | 空穴法, 作用量分解, 有效杂质, Anderson 杂质模型 |
 | DMFT 无穷维严格性 | [user-added/量子多体/dmft-infinite-dimension.md](./user-added/量子多体/dmft-infinite-dimension.md) | 标度律, 态密度高斯分布, 局域自能, Cavity 对角化 |
+| 格点 Hohenberg-Kohn 定理 | [user-added/量子多体/lattice-hk-theorem.md](./user-added/量子多体/lattice-hk-theorem.md) | LDFT, 密度矩阵, HK定理, 格点模型, 变分原理 |
+| T[γ] 的精确形式 | [user-added/量子多体/t-gamma-explicit-form.md](./user-added/量子多体/t-gamma-explicit-form.md) | LDFT, 单粒子能量泛函, SIAM, T[γ] |
 | 倒格子与晶面间距 | [user-added/量子多体/reciprocal-lattice.md](./user-added/量子多体/reciprocal-lattice.md) | 固体物理, 晶体结构, 倒空间 |
 | 离子晶体结合与体变模量 | [user-added/量子多体/ionic-bonding-bulk-modulus.md](./user-added/量子多体/ionic-bonding-bulk-modulus.md) | 固体物理, 离子结合, 马德隆常数, 体变模量 |
 | 共价结合与LCAO模型 | [user-added/量子多体/covalent-bonding-lcao.md](./user-added/量子多体/covalent-bonding-lcao.md) | 固体物理, 共价键, 分子轨道 |

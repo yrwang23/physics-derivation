@@ -7,8 +7,23 @@ description: Trace and derive physics formulas from academic papers, with a pers
 
 ## 概述
 
-本 skill 帮助用户从物理 paper 中推导公式。核心思路是：**以推导为主线，在每一步需要某个概念或方法时停下来，展示其作用，询问用户是否了解，然后继续。** 全部输出使用中文。推导完成后生成 KaTeX 渲染的 HTML 网页，供用户在侧边栏对照查看。
+本 skill 帮助用户从物理 paper 中推导公式。核心思路：**以推导为主线，在每一步需要某个概念或方法时停下来，展示其作用，询问用户是否了解，然后继续。** 全部输出使用中文，公式使用 Unicode 符号 + 简单文本格式，无需任何渲染工具。
 
+---
+
+## 公式书写规范
+
+所有对用户的公式输出（包括 Chat 对话和最终 .md 文档）统一使用标准 LaTeX markdown 格式：
+- **行内公式**用 \(...\) 包裹（避免单 $ 不被渲染的问题，也避开 _ 与 markdown 的冲突）
+- **独立行公式**用 $$...$$ 包裹
+
+### Chat 对话中的示例
+- 薛定谔方程: \(i\hbar \partial_t |\psi\rangle = \hat{H}|\psi\rangle\)
+- 费米子反对易: \(\{c_i, c_j^\dagger\} = \delta_{ij}\)
+- 色散关系: \(\omega = \sqrt{4\beta/m}\,|\sin(ka/2)|\)
+
+### 最终 .md 文档
+按 `references/derivation-template.md` 的模板格式输出，公式风格同上。
 ---
 
 ## 知识库结构
@@ -23,10 +38,10 @@ description: Trace and derive physics formulas from academic papers, with a pers
 
 | 目录 | 分类 | 内容 |
 |------|------|------|
-| `量子多体/` | 📐 量子多体 | 多体理论工具：二次量子化、格林函数、路径积分等 |
-| `量子信息与神经网络/` | 🔬 量子信息与神经网络 | 量子信息、量子计算、量子AI、神经网络量子态 |
-| `凝聚态计算/` | 💻 凝聚态计算 | DMFT、QMC、DMRG、DFT 等数值方法 |
-| `其他/` | 📦 其他 | 不属于以上分类的知识 |
+| `量子多体/` | 量子多体 | 多体理论工具：二次量子化、格林函数、路径积分等 |
+| `量子信息与神经网络/` | 量子信息与神经网络 | 量子信息、量子计算、量子AI、神经网络量子态 |
+| `凝聚态计算/` | 凝聚态计算 | DMFT、QMC、DMRG、DFT 等数值方法 |
+| `其他/` | 其他 | 不属于以上分类的知识 |
 
 当用户提供新知识点时，**必须询问用户属于哪个分类**，然后放入对应子目录。
 
@@ -37,6 +52,7 @@ description: Trace and derive physics formulas from academic papers, with a pers
 ### 总则
 
 - **所有对用户的输出使用中文**
+- **全部输出统一使用 \(...\)（行内）和 $$...$$（独立行）LaTeX 格式**
 - **推导是主线，确认知识自然嵌入其中**
 - **不默认用户了解任何概念**
 - **展示方法的作用优先于展示定义**
@@ -50,24 +66,11 @@ description: Trace and derive physics formulas from academic papers, with a pers
   2. 了解 → 入库 → 继续；不了解 → 教学 → 入库 → 继续
   3. 入库时询问用户该知识点属于哪个分类
 
-**第 3 步：生成 KaTeX 渲染视图** — 推导完成后：
-  1. 将完整推导整理为 markdown 文件（含 LaTeX）
-  2. 运行 `scripts/render_katex.py` 生成 HTML
-  3. 用 in-app browser 打开供对照查看
+**第 3 步：生成完整推导总结** — 所有概念确认完成后，询问用户是否需要一份完整的推导文档。如果需要，按 `references/derivation-template.md` 的格式输出，公式使用标准 LaTeX markdown 格式（$...$ / $$...$$），聊天文字部分使用中文。
 
 **第 4 步：迭代问答** — 用户追问时回到第 2 步处理新知识点
 
 > 详细流程参见 `references/workflow.md`
-
----
-
-## KaTeX 渲染说明
-
-推导过程中 chat 里使用 Unicode 符号确保可选中。推导完成后用 `render_katex.py` 将 LaTeX 渲染为 HTML 页面。
-
-```bash
-python3 scripts/render_katex.py 输入.md --title "标题" --output 输出.html
-```
 
 ---
 
@@ -90,19 +93,7 @@ physics-derivation/
   references/
     workflow.md
     derivation-template.md
-    kb-entry-spec.md              # 给其他 AI 的输入规范
+    kb-entry-spec.md
+    unicode-math.md               # Unicode 物理符号参考表
   scripts/
     add_knowledge.py
-    render_katex.py
-```
-
-## 参考文件
-
-- `references/workflow.md` — 完整的工作流说明
-- `references/derivation-template.md` — 推导文档模板
-- `references/kb-entry-spec.md` — 知识条目输入规范（给其他 AI 整理笔记用）
-
-## 脚本
-
-- `scripts/add_knowledge.py` — 添加知识条目（需指定分类）
-- `scripts/render_katex.py` — 将 LaTeX 渲染为 KaTeX 网页
